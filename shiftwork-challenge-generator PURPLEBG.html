@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shiftwork Studios Game Dev Challenge Generator</title>
+    <style>
+        body, html {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color: #8054a9;
+            color: black;
+        }
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #8054a9;
+        }
+        .app-header {
+            background-color: #6a3b9a;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        .app-content {
+            flex-grow: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .difficulty-buttons {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+        button {
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .easy { background-color: #9d7eba; }
+        .medium { background-color: #7f5b9e; }
+        .hard { background-color: #613d82; }
+        .generate-btn {
+            background-color: #4a2d66;
+            width: 100%;
+            margin-top: 20px;
+        }
+        #challenge {
+            margin-top: 20px;
+            font-size: 18px;
+            line-height: 1.5;
+            text-align: center;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="app-header">
+            <h1>Shiftwork Studios Game Dev Challenge Generator</h1>
+        </div>
+        <div class="app-content">
+            <div class="difficulty-buttons">
+                <button onclick="setDifficulty('easy')" class="easy">Easy</button>
+                <button onclick="setDifficulty('medium')" class="medium">Medium</button>
+                <button onclick="setDifficulty('hard')" class="hard">Hard</button>
+            </div>
+            <button onclick="generateChallenge()" class="generate-btn">Generate Epic Challenge</button>
+            <div id="challenge"></div>
+        </div>
+    </div>
+
+    <script>
+        // The JavaScript remains the same as in the previous version
+        let currentDifficulty = 'medium';
+
+        const themes = {
+            easy: ["space", "medieval", "underwater", "jungle", "city"],
+            medium: ["steampunk", "cyberpunk", "post-apocalyptic", "fantasy", "historical"],
+            hard: ["retrofuturistic", "cosmic horror", "dreamscape", "alternate history", "fractal dimension"]
+        };
+
+        const mechanics = {
+            easy: ["platformer", "puzzle", "endless runner", "match-3", "point-and-click"],
+            medium: ["tower defense", "roguelike", "metroidvania", "tactical RPG", "rhythm game"],
+            hard: ["4D puzzle", "reality manipulation", "time loop survival", "quantum entanglement shooter", "philosophical debate battler"]
+        };
+
+        const constraints = {
+            easy: ["use only 3 colors", "make it turn-based", "include a day-night cycle", "use only geometric shapes", "implement a simple crafting system"],
+            medium: ["use procedural generation", "implement a karma system", "all characters must be non-humanoid", "the game changes based on the player's real-world time", "implement a 'butterfly effect' where small actions have consequences"],
+            hard: ["the game changes genre every 10 minutes", "the game world is set inside a living organism", "all audio is procedurally generated", "the game can only be played for 5 minutes per day", "the game world is a mathematical equation"]
+        };
+
+        const timeLimits = {
+            easy: ["2 days", "1 week"],
+            medium: ["1 week", "2 weeks"],
+            hard: ["2 weeks", "1 month"]
+        };
+
+        function setDifficulty(difficulty) {
+            currentDifficulty = difficulty;
+            document.querySelectorAll('.difficulty-buttons button').forEach(btn => btn.style.opacity = '0.5');
+            document.querySelector(`.${difficulty}`).style.opacity = '1';
+        }
+
+        function generateChallenge() {
+            const theme = themes[currentDifficulty][Math.floor(Math.random() * themes[currentDifficulty].length)];
+            const mechanic = mechanics[currentDifficulty][Math.floor(Math.random() * mechanics[currentDifficulty].length)];
+            const constraint = constraints[currentDifficulty][Math.floor(Math.random() * constraints[currentDifficulty].length)];
+            const timeLimit = timeLimits[currentDifficulty][Math.floor(Math.random() * timeLimits[currentDifficulty].length)];
+
+            const challenge = `Create a ${theme}-themed game featuring a ${mechanic} that ${constraint}. Complete this challenge in ${timeLimit}.`;
+            document.getElementById('challenge').textContent = challenge;
+        }
+
+        // Set initial difficulty
+        setDifficulty('medium');
+    </script>
+</body>
+</html>
